@@ -1,5 +1,6 @@
 package com.example.week2;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -34,5 +35,20 @@ public class CreateBookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         finalLabel.setVisible(false);
+        genreComboBox.getItems().addAll(Book.findGenres());
+    }
+
+    @FXML
+    void saveBook(ActionEvent event) {
+        // System.out.println("I am here");
+        String bookName = bookNameTextField.getText();
+        String author = authorTextField.getText();
+        String genre = genreComboBox.getSelectionModel().getSelectedItem();
+        //double price = priceSpinner.getValue();
+        boolean availability = availibilityCheckBox.isSelected();
+
+        Book book1 = new Book(1, bookName, author, genre, 2.2, availability);
+        finalLabel.setVisible(true);
+        finalLabel.setText(book1.toString());
     }
 }
