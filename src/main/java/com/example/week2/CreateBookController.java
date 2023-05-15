@@ -1,13 +1,11 @@
 package com.example.week2;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +34,36 @@ public class CreateBookController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         finalLabel.setVisible(false);
         genreComboBox.getItems().addAll(Book.findGenres());
+        SpinnerValueFactory<Double> spinnerValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(20.00, 200.00, 2.00, 5);
+        priceSpinner.setValueFactory(spinnerValueFactory);
+        priceSpinner.setEditable(true);
+
+        TextField spinnerTextField = priceSpinner.getEditor();
+
+        // anonymous inner class
+//        spinnerTextField.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+//                try {
+//                    Double.parseDouble(newValue);
+//                }catch (Exception e){
+//                    finalLabel.setVisible(true);
+//                    finalLabel.setText("Only double values allowed for price");
+//                }
+//            }
+//        });
+
+        // lambda function
+        spinnerTextField.textProperty().addListener((observable,oldValue,newValue) -> {
+            try {
+                    Double.parseDouble(newValue);
+                }catch (Exception e){
+                    finalLabel.setVisible(true);
+                    finalLabel.setText("Only double values allowed for price");
+                    spinnerTextField.setText(oldValue);
+                }
+        });
+
     }
 
     @FXML
@@ -45,10 +73,10 @@ public class CreateBookController implements Initializable {
             String bookName = bookNameTextField.getText();
             String author = authorTextField.getText();
             String genre = genreComboBox.getSelectionModel().getSelectedItem();
-            //double price = priceSpinner.getValue();
+            double price = priceSpinner.getValue();
             boolean availability = availibilityCheckBox.isSelected();
 
-            Book book1 = new Book(1, bookName, author, genre, 2.2, availability);
+            Book book1 = new Book(1, bookName, author, genre, price, availability);
             finalLabel.setVisible(true);
             finalLabel.setText(book1.toString());
         } catch (Exception e){
