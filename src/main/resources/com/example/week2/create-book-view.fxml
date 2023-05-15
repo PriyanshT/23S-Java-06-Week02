@@ -41,18 +41,18 @@
                   <Label text="Genre" GridPane.rowIndex="2" />
                   <Label text="Price" GridPane.rowIndex="3" />
                   <Label text="Availibility" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" promptText="Choose Genre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Spinner GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="bookNameTextField" GridPane.columnIndex="1" />
+                  <TextField fx:id="authorTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="genreComboBox" prefWidth="150.0" promptText="Choose Genre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Spinner fx:id="priceSpinner" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <CheckBox fx:id="availibilityCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="30.0" right="30.0" top="5.0" />
                </padding>
             </GridPane>
             <Button mnemonicParsing="false" text="Submit" />
-            <Label text="Label">
+            <Label fx:id="finalLabel" text="Label">
                <padding>
                   <Insets top="10.0" />
                </padding>
