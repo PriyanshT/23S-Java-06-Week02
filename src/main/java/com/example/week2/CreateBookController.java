@@ -40,15 +40,20 @@ public class CreateBookController implements Initializable {
 
     @FXML
     void saveBook(ActionEvent event) {
-        // System.out.println("I am here");
-        String bookName = bookNameTextField.getText();
-        String author = authorTextField.getText();
-        String genre = genreComboBox.getSelectionModel().getSelectedItem();
-        //double price = priceSpinner.getValue();
-        boolean availability = availibilityCheckBox.isSelected();
+        try {
+            // System.out.println("I am here");
+            String bookName = bookNameTextField.getText();
+            String author = authorTextField.getText();
+            String genre = genreComboBox.getSelectionModel().getSelectedItem();
+            //double price = priceSpinner.getValue();
+            boolean availability = availibilityCheckBox.isSelected();
 
-        Book book1 = new Book(1, bookName, author, genre, 2.2, availability);
-        finalLabel.setVisible(true);
-        finalLabel.setText(book1.toString());
+            Book book1 = new Book(1, bookName, author, genre, 2.2, availability);
+            finalLabel.setVisible(true);
+            finalLabel.setText(book1.toString());
+        } catch (Exception e){
+            finalLabel.setVisible(true);
+            finalLabel.setText(e.getMessage());
+        }
     }
 }
